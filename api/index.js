@@ -1,13 +1,26 @@
-import express from 'express'
-// import monogo db 
-//I am using dot env because we added new modules
-
+import express from 'express';
 import mongoose from 'mongoose';
-// connecting to mongodb
-mongoose.connect("process.env.MONGO")
+import dotenv from 'dotenv';
+
+// Initialize dotenv to load environment variables from .env file
+dotenv.config();
+
+console.log(process.env.MONGO); // This should print the MongoDB URL if the .env file is configured correctly
+
+mongoose.connect(process.env.MONGO, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+    console.log("Connected to MongoDB");
+})
+.catch((err) => {
+    console.error("Failed to connect to MongoDB", err);
+});
+
 const app = express();
 
-//listening port 
-app.listen(5500,() =>{
-    console.log("Server listening at 5500")
-})
+// Listening port 
+app.listen(5500, () => {
+    console.log("Server listening at 5500");
+});

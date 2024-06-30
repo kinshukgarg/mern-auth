@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+// we have to import router to here because in user we have use default router
+import userRoutes from './routes/user.route.js'
 
 // Initialize dotenv to load environment variables from .env file
 dotenv.config();
@@ -19,6 +21,8 @@ mongoose.connect(process.env.MONGO, {
 });
 
 const app = express();
+//using for router 
+app.use("/api/user",userRoutes)
 
 // Listening port 
 app.listen(5500, () => {

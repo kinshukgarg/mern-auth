@@ -1,8 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-// we have to import router to here because in user we have use default router
-import userRoutes from './routes/user.route.js'
+import userRoutes from './routes/user.route.js';
+import authRoutes from './routes/auth.route.js'; // Make sure you have this route defined
 
 // Initialize dotenv to load environment variables from .env file
 dotenv.config();
@@ -20,9 +20,15 @@ mongoose.connect(process.env.MONGO, {
     console.error("Failed to connect to MongoDB", err);
 });
 
+
 const app = express();
-//using for router 
-app.use("/api/user",userRoutes)
+//allows json
+app.use(express.json())
+// Using router for user routes
+app.use("/api/user", userRoutes);
+
+// Using router for auth routes
+app.use("/api/auth", authRoutes);
 
 // Listening port 
 app.listen(5500, () => {

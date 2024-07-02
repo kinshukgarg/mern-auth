@@ -9,10 +9,7 @@ dotenv.config();
 
 console.log(process.env.MONGO); // This should print the MongoDB URL if the .env file is configured correctly
 
-mongoose.connect(process.env.MONGO, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGO)
 .then(() => {
     console.log("Connected to MongoDB");
 })

@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cors from "cors";
 import userRoutes from './routes/user.route.js';
 import authRoutes from './routes/auth.route.js'; // Make sure you have this route defined
 
@@ -21,6 +22,7 @@ mongoose.connect(process.env.MONGO)
 const app = express();
 //allows json
 app.use(express.json())
+app.use(cors())
 // Using router for user routes
 app.use("/api/user", userRoutes);
 
